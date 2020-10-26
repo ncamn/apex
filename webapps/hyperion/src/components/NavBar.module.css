@@ -1,0 +1,31 @@
+.navbar {
+  background: #222;
+  box-shadow: 4px 0 1px 1px #222;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-height: 100vh;
+}
+
+.brand {
+  padding: 18px 32px;
+  white-space: nowrap;
+}
+
+.list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.list > li {
+  border-left: 4px solid #222;
+  padding: 8px 32px 8px 18px;
+}
+
+.list > li:hover {
+  border-left: 4px solid crimson;
+}
+
+.list > li:hover a {
+  color: crimson
+}

@@ -1,0 +1,34 @@
+.corporation-panel {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 2;
+}
+
+.corporation-panel > div:first-child {
+  border-bottom: 1px solid #333;
+}
+
+.corporation-panel > div {
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 10px;
+}
+
+.corporation-panel > div img,
+.corporation-panel > div span {
+  padding-right: 10px;
+}
+
+.corporation-header > div {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.description {
+  font-style: italic;
+  font-size: small;
+}

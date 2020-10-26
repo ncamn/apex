@@ -1,0 +1,7 @@
+.container {
+  display: flex;
+}
+
+.views {
+  width: 100%;
+}

@@ -1,0 +1,27 @@
+ul.corp-list {
+  height: 100vh;
+  list-style-type: none;
+  margin: 0;
+  overflow: hidden;
+  overflow-y: scroll;
+  padding: 0;
+}
+
+li.corp-list-item {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  padding: 10px;
+}
+
+li.corp-list-item:hover {
+  background: #226;
+}
+
+li.corp-list-item img {
+  width: 30px;
+}
+
+li.corp-list-item span {
+  padding-left: 10px;
+}

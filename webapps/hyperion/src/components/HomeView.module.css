@@ -1,0 +1,26 @@
+.homeView {
+  height: 100%;
+  min-height: 100vh;
+  position: relative;
+}
+
+.video {
+  top: 0;
+  left: 0;
+  position: absolute;
+  z-index: -1;
+  overflow: hidden;
+  max-width: 100%;
+}
+
+.overlay {
+  align-items: center;
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  justify-content: center;
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
