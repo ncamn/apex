@@ -1,0 +1,26 @@
+.header {
+  align-items: center;
+  border-bottom: 1px solid #ccc;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.row {
+  border-bottom: 1px solid #ccc;
+  display: flex;
+  justify-content: left;
+  padding: 6px 10px;
+}
+
+.row:hover {
+  background-color: #efefef;
+  font-weight: bolder;
+}
+
+.footer {
+  display: flex;
+  justify-content: right;
+  padding: 8px 16px;
+}

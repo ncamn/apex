@@ -1,0 +1,22 @@
+.app {
+  display: flex;
+}
+
+.content {
+  flex-grow: 1;
+}
+
+/* .app {
+  text-align: center;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  grid-template-rows: auto 1fr;
+  min-height: 100vh;
+}
+
+.contentWrapper {
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 2;
+  grid-row-end: 3;
+} */
