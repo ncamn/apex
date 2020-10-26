@@ -1,0 +1,14 @@
+.notificationContainer {
+  bottom: 20px;
+  right: 20px;
+  position: fixed;
+}
+  
+.notification {
+  background: #225;
+  border-radius: 2px;
+  padding: 12px;
+  margin-top: 20px;
+  min-width: 250px;
+  transition: all 0.5s ease
+}

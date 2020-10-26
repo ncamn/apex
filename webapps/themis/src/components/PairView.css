@@ -1,0 +1,22 @@
+#pair-view {
+    margin-top: 10px;
+}
+
+#pair-view select {
+    height: 2em;
+    outline: none;
+}
+
+.dashboard {
+    align-items: center;
+    display: flex;
+    flex-direction: row;
+}
+
+.dashboard .chart {
+    flex-basis: 85%;
+}
+
+.dashboard .order-book {
+    flex-basis: 15%;
+}

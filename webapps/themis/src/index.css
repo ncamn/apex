@@ -1,0 +1,206 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+/* Global CSS */
+body {
+  background: #222 !important;
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+h1, h2, h3, h4, h5, h6, p, span, a, table, thead, tbody, tr, th, td, label {
+  color: #eee;
+}
+
+h3 {
+  margin-bottom: 20px;
+}
+
+select {
+  background-color: #222;
+  color: #eee;
+  border: 1px solid #333;
+}
+
+form {
+  min-width: 300px;
+}
+
+form > div {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+
+input {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid grey;
+  color: #eee;
+  outline: none;
+}
+
+button {
+  background: #226;
+  border-radius: 2px;
+  border: none;
+  color: #eee;
+  outline: none;
+  padding: 8px;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:focus,
+a:hover {
+  color: white;
+  text-decoration: none;
+}
+
+/* Fix content padding below the fixed-top navbar */
+#root {
+  padding-top: 50px;
+}
+
+/* Override some Bootstrap */
+nav.navbar {
+  background: #222;
+  border-bottom: 1px solid #333;
+}
+
+.nav > li > a:focus {
+  background: #222 !important;
+}
+
+.nav > li > a:hover {
+  background: #226 !important;
+}
+
+.panel {
+  background: #222;
+}
+
+.panel-default {
+  border: 1px solid #333;
+  border-radius: 0;
+}
+
+.panel-default > .panel-heading {
+  background: #226;
+  border-bottom: 1px solid #333;
+}
+
+/* Classes */
+.flex-column {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.flex-row {
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.full-page {
+  align-items: center;
+  display: flex;
+  height: 94vh;
+  justify-content: center;
+  width: 100vw;
+}
+
+/* Navigation bar */
+.nav-dropdown > ul {
+  background: #222;
+  border: 1px solid #333;
+  border-top: 0;
+  padding: 0;
+  position: absolute;
+}
+
+.nav-dropdown > ul li {
+  list-style-type: none;
+  padding: 7px 20px;
+  text-align: center;
+}
+
+.nav-dropdown > ul li:hover {
+  background: #225;
+}
+
+/* Spinner */
+.spinner {
+  height: 40px;
+}
+
+.spinner > div {
+  background-color: #22d;
+  border-radius: 4px;
+  display: inline-block;
+  height: 100%;
+  margin: auto 1px;
+  width: 4px;
+
+  -webkit-animation: sk-stretchdelay 1.2s infinite ease-in-out;
+  animation: sk-stretchdelay 1.2s infinite ease-in-out;
+}
+
+.spinner .shift1 {
+  -webkit-animation-delay: -1.1s;
+  animation-delay: -1.1s;
+}
+
+.spinner .shift2 {
+  -webkit-animation-delay: -1.0s;
+  animation-delay: -1.0s;
+}
+
+.spinner .shift3 {
+  -webkit-animation-delay: -0.9s;
+  animation-delay: -0.9s;
+}
+
+.spinner .shift4 {
+  -webkit-animation-delay: -0.8s;
+  animation-delay: -0.8s;
+}
+
+@-webkit-keyframes sk-stretchdelay {
+  0%, 40%, 100% { -webkit-transform: scaleY(0.4) }
+  20% { -webkit-transform: scaleY(1.0) }
+}
+
+@keyframes sk-stretchdelay {
+  0%, 40%, 100% {
+      transform: scaleY(0.4);
+      -webkit-transform: scaleY(0.4);
+  }  20% {
+         transform: scaleY(1.0);
+         -webkit-transform: scaleY(1.0);
+     }
+}
+
+/* TODO Rework spinner css */
+li.navbar-spinner {
+  display: flex;
+  align-items: center;
+  height: 50px;
+}
