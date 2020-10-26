@@ -1,5 +1,5 @@
 {
-  "name": "api-expressjs",
+  "name": "api-nodejs",
   "version": "0.1.0",
   "private": true,
   "type": "module",
@@ -20,6 +20,7 @@
     "koa": "^2.11.0",
     "koa-morgan": "^1.0.1",
     "lodash": "^4.17.15",
+    "minio": "^7.0.16",
     "mongodb": "^3.5.4",
     "winston": "^3.2.1"
   },
@@ -27,6 +28,7 @@
     "@types/faker": "^4.1.10",
     "@types/koa-morgan": "^1.0.4",
     "@types/lodash": "^4.14.149",
+    "@types/minio": "^7.0.6",
     "@types/mocha": "^5.2.7",
     "@types/mongodb": "^3.5.2",
     "@typescript-eslint/eslint-plugin": "^2.22.0",

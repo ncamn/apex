@@ -1,6 +1,7 @@
 import faker from "faker";
 
 import db, { client } from "../db.js";
+import minio from "../minio.js";
 import logger from "../logger.js";
 import { CardType } from "../models/match.js";
 
@@ -15,23 +16,24 @@ const undo = process.argv.reduce(
 );
 
 if (redo || undo) {
-  await db.collection("clubs").deleteMany({});
-  logger.info("mongoose: clubs collection pruned");
+  await Promise.all(
+    [
+      { model: "clubs", bucket: true },
+      { model: "leagues", bucket: true },
+      { model: "matches" },
+      { model: "players", bucket: true },
+      { model: "referees", bucket: true },
+      { model: "stadiums", bucket: true }
+    ].map(async ({ bucket, model }) => {
+      await db.collection(model).deleteMany({});
+      logger.info(`mongoose: ${model} collection pruned`);
 
-  await db.collection("leagues").deleteMany({});
-  logger.info("mongoose: leagues collection pruned");
-
-  await db.collection("matches").deleteMany({});
-  logger.info("mongoose: matches collection pruned");
-
-  await db.collection("players").deleteMany({});
-  logger.info("mongoose: players collection pruned");
-
-  await db.collection("referees").deleteMany({});
-  logger.info("mongoose: referees collection pruned");
-
-  await db.collection("stadiums").deleteMany({});
-  logger.info("mongoose: stadiums collection pruned");
+      if (bucket) {
+        await minio.removeBucket(model);
+        logger.info(`minio: ${model} bucket removed`);
+      }
+    })
+  );
 
   if (undo) process.exit();
 }
@@ -46,6 +48,8 @@ const leagues = [...Array(10)].map((_, index) => ({
 }));
 await db.collection("leagues").insertMany(leagues);
 logger.info("mongodb: leagues collection seeded");
+await minio.makeBucket("leagues", "");
+logger.info("minio: leagues bucket created");
 
 /**
  * Stadiums
@@ -56,6 +60,8 @@ const stadiums = [...Array(100)].map(() => ({
 }));
 await db.collection("stadiums").insertMany(stadiums);
 logger.info("mongodb: stadiums collection seeded");
+await minio.makeBucket("stadiums", "");
+logger.info("minio: stadiums bucket created");
 
 /**
  * Clubs
@@ -65,6 +71,8 @@ const clubs = [...Array(100)].map(() => ({
 }));
 await db.collection("clubs").insertMany(clubs);
 logger.info("mongodb: clubs collection seeded");
+await minio.makeBucket("clubs", "");
+logger.info("minio: clubs bucket created");
 
 /**
  * Players
@@ -78,6 +86,8 @@ const players = [...Array(1000)].map(() => ({
 }));
 await db.collection("players").insertMany(players);
 logger.info("mongodb: players collection seeded");
+await minio.makeBucket("players", "");
+logger.info("minio: players bucket created");
 
 /**
  * Referees
@@ -90,6 +100,8 @@ const referees = [...Array(100)].map(() => ({
 }));
 await db.collection("referees").insertMany(referees);
 logger.info("mongodb: referees collection seeded");
+await minio.makeBucket("referees", "");
+logger.info("minio: referees bucket created");
 
 /**
  * Matches
