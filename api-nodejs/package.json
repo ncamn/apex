@@ -1,0 +1,84 @@
+{
+  "name": "api-expressjs",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "coverage": "NODE_ENV=test NODE_TLS_REJECT_UNAUTHORIZED=0 nyc mocha",
+    "lint": "eslint --ext .ts --fix src/",
+    "prettify": "prettier --write src/**/*.ts",
+    "seed": "node --unhandled-rejections=strict --harmony-top-level-await dist/utils/seed.js",
+    "start": "node --unhandled-rejections=strict --harmony-top-level-await dist/index.js",
+    "test": "NODE_ENV=test NODE_TLS_REJECT_UNAUTHORIZED=0 mocha"
+  },
+  "dependencies": {
+    "@hapi/joi": "^17.1.0",
+    "@koa/cors": "^3.0.0",
+    "apollo-server-koa": "^2.11.0",
+    "graphql": "^14.5.8",
+    "koa": "^2.11.0",
+    "koa-morgan": "^1.0.1",
+    "lodash": "^4.17.15",
+    "mongodb": "^3.5.4",
+    "winston": "^3.2.1"
+  },
+  "devDependencies": {
+    "@types/faker": "^4.1.10",
+    "@types/hapi__joi": "^16.0.12",
+    "@types/koa-morgan": "^1.0.4",
+    "@types/lodash": "^4.14.149",
+    "@types/mocha": "^5.2.7",
+    "@types/mongodb": "^3.5.2",
+    "@typescript-eslint/eslint-plugin": "^2.22.0",
+    "@typescript-eslint/parser": "^2.22.0",
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
+    "eslint": "^6.8.0",
+    "eslint-config-prettier": "^6.10.0",
+    "eslint-config-standard": "^14.1.0",
+    "eslint-plugin-import": "^2.20.1",
+    "eslint-plugin-node": "^11.0.0",
+    "eslint-plugin-prettier": "^3.1.2",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-standard": "^4.0.1",
+    "faker": "^4.1.0",
+    "husky": "^4.2.3",
+    "lint-staged": "^10.0.8",
+    "mocha": "^7.1.0",
+    "nyc": "^15.0.0",
+    "prettier": "^1.19.1",
+    "typescript": "^3.8.3"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.ts": [
+      "eslint --fix",
+      "git add"
+    ],
+    "*.{ts,json,md}": [
+      "prettier --write",
+      "git add"
+    ]
+  },
+  "mocha": {
+    "recursive": true,
+    "spec": "dist/tests/"
+  },
+  "nyc": {
+    "extension": [
+      ".ts"
+    ],
+    "include": [
+      "src/"
+    ],
+    "exclude": [
+      "**/*.d.ts"
+    ],
+    "all": "true"
+  }
+}

@@ -1,0 +1,19 @@
+# Logs
+*.log
+yarn-error.log*
+
+# Dependencies
+node_modules/
+
+# Environment variables
+.env
+
+# TLS certificates
+tls/
+
+# Tests coverage
+.nyc_output/
+coverage/
+
+# TypeScript build output
+dist/
