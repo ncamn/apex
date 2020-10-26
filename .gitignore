@@ -1,0 +1,27 @@
+# NodeJS
+node_modules/
+
+# Typescript build output
+dist/
+
+# IDE configuration
+.idea/
+.vscode/
+
+# Tests coverage
+.nyc_output/
+
+# TLS certificates and keys
+*.pem
+
+# Local environment
+.env*
+
+# Local YAML configuration override
+config.override.yml
+
+# TODO
+TODO.md
+
+# Logs
+*.log
