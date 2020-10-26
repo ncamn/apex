@@ -1,0 +1,164 @@
+body {
+    background: rgb(250, 250, 250) !important;
+    font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+nav li.active > a {
+    border-bottom: solid 3px grey;
+    padding-bottom: 12px;
+}
+
+section,
+footer {
+    display: flex !important;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+section {
+}
+
+button:focus {
+    outline: none;
+}
+
+.circle {
+    border-radius: 50%;
+}
+
+#welcome {
+    padding-top: 70px;
+}
+
+#welcome > .container {
+    display: flex;
+    flex-direction: row;
+}
+
+#welcome .info {
+    flex-basis: 30%;
+}
+
+#welcome .info > div {
+    margin: auto auto 10px auto;
+}
+
+#welcome .studies {
+    flex-basis: 70%;
+    text-align: left;
+}
+
+#experience .content {
+    display: flex;
+    flex-direction: row;
+}
+
+#experience .timeline {
+    flex-basis: 20%;
+}
+
+.jobs {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 80%;
+    justify-content: space-around;
+    text-align: left;
+}
+
+.job {
+    margin-bottom: 20px;
+}
+
+.labels-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+.labels-container > span {
+    margin-right: 5px;
+}
+
+#skills {
+
+}
+
+.skills {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.skill {
+    padding: 20px;
+    flex-basis: 33%;
+}
+
+.project {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 30px auto;
+}
+
+.project-default {
+    flex-direction: row;
+}
+
+.project-reverse {
+    flex-direction: row-reverse;
+}
+
+.project .text {
+    flex-basis: 50%;
+    padding: 20px;
+}
+
+.project .screen {
+    flex-basis: 50%;
+}
+
+.project .screen > div {
+    margin: auto;
+}
+
+#location {
+    height: 40vh;
+}
+
+#contact {
+    background: white;
+    color: black;
+}
+
+#contact button {
+    margin-bottom: 20px;
+}
+
+#map {
+    height: 100%;
+    width: 100%;
+}
+
+footer {
+    background: darkslategrey;
+    color: white;
+}
+
+.social-links {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+.social-link {
+    background: black;
+    display: flex;
+    flex-direction: column;
+    height: 50px;
+    justify-content: center;
+    margin: 10px;
+    width: 50px;
+}

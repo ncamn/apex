@@ -1,0 +1,185 @@
+extends layout
+
+block navbar
+    nav.navbar.navbar-default.navbar-fixed-top
+        div.container
+            div.navbar-header
+                a.navbar-brand Nicolas Camus
+
+            div.collapse.navbar-collapse
+                ul.nav.navbar-nav
+                    li.nav-item
+                        a.scroll(href='#welcome') Welcome
+                    li.nav-item
+                        a.scroll(href='#experience') Experience
+                    li.nav-item
+                        a.scroll(href='#skills') Skills
+                    li.nav-item
+                        a.scroll(href='#projects') Projects
+                    li.nav-item
+                        a.scroll(href='#location') Location
+
+                form.navbar-form.navbar-right
+                    button.btn.btn-primary(data-toggle='modal', data-target='#contact-modal') Contact me
+
+block content
+    section#welcome
+        div.container
+            div.info
+                div(style='background: grey; height: 300px; width: 250px;')
+                p Nicolas Camus
+                p 21 years old
+                p Paris, France
+                p Student in Computer Science
+            div.studies
+                h3 A few words
+                hr
+                p Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                h3 Studies
+                hr
+                mixin study(title, description)
+                    h4= title
+                    p= description
+
+                +study("Highschool",
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.")
+
+                +study("Epitech",
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.")
+
+    div.container
+        hr
+
+    section#experience
+        div.container
+            h2 Experience
+            div.content
+                div.timeline
+                    div(style='background: grey; height: 500px; width: 20px; margin: auto;')
+
+                div.jobs
+                    mixin job(title, subtitle, description, labels)
+                        div.job
+                            h4= title
+                            h6= subtitle
+                            p= description
+                            div.labels-container
+                                each val in labels
+                                    span.label.label-primary= val
+
+                    +job("Orange",
+                    "Trainee, Paris (France), 3 weeks",
+                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+                    ["Web", "HTML/CSS"])
+
+                    +job("Montres-Luxe-Collection",
+                    "Trainee, Paris (France), 6 months",
+                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+                    ["Web", "HTML/CSS", "Wordpress", "PHP"])
+
+                    +job("MKDN",
+                    "Trainee, Strasbourg, (France), 4 months",
+                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+                    ["Web", "HTML/CSS", "Wordpress", "Prestashop", "PHP", "Linux"])
+
+                    +job("Octopulse",
+                    "Trainee, Paris, (France), 4 months",
+                    "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+                    ["Web", "HTML/CSS", "Javascript", "NodeJS", "ExpressJS", "Jade/Pug", "Devops", "Docker", "Kubernetes", "Linux"])
+
+    div.container
+        hr
+
+    section#skills
+
+        mixin skill(label)
+            div.skill
+                label= label
+                div.progress
+                    div.progress-bar(role='progressbar', aria-valuemin='0', aria-valuemax='100')&attributes(attributes)
+
+        div.container
+            h2 Skills
+            h3 Languages
+            div.skills
+                +skill("HTML/CSS")(aria-valuenow='10', style='width: 10%')
+                +skill("PHP")(aria-valuenow='20', style='width: 20%')
+                +skill("Javascript")(aria-valuenow='30', style='width: 30%')
+                +skill("Java")(aria-valuenow='50', style='width: 50%')
+                +skill("C/C++")(aria-valuenow='60', style='width: 60%')
+                +skill("Shell (Bash)")(aria-valuenow='60', style='width: 60%')
+
+            h3 Technos
+            div.skills
+                +skill("NodeJS (ExpressJS)")(aria-valuenow='40', style='width: 40%')
+                +skill("Docker")(aria-valuenow='40', style='width: 40%')
+                +skill("Kubernetes")(aria-valuenow='40', style='width: 40%')
+                +skill("Android (Java / C++ / XML)")(aria-valuenow='40', style='width: 40%')
+
+    div.container
+        hr
+
+    section#projects.full-page
+        div.container
+            h2 Projects
+
+            mixin project(title, description)
+                each val in [0, 1, 2, 3, 4]
+                    if -val % 2 == 0
+                        div.project.project-default
+                    else
+                        div.project.project-reverse
+
+                    div.text
+                        h3= title
+                        p= description
+                    div.screen
+                        div(style='background: grey; height: 200px; width: 400px;')
+
+            +project("Octopulse",
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.")
+
+            +project("Halfake",
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.")
+
+            +project("Droparts",
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.")
+
+            +project("Atrato",
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.")
+
+            +project("Thisma",
+            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.")
+
+    section#location
+        div#map
+
+    section#contact
+        div.container
+            h2 Interested ?
+            button.btn.btn-primary(data-toggle='modal', data-target='#contact-modal') Contact me !
+
+    footer#social
+        div.container
+            h3  Follow me
+            div.social-links
+                mixin social-link
+                    div.circle.social-link
+                        i.fa.fa-2x(aria-hidden='true')&attributes(attributes)
+
+                +social-link()(class='fa-twitter')
+                +social-link()(class='fa-linkedin')
+                +social-link()(class='fa-github')
+
+    div#contact-modal.modal.fade
+        div.modal-dialog
+            div.modal-content
+                div.modal-header
+                    h4.modal-title Contact me
+                div.modal-body
+                    form
+                        div.form-group
+
+                div.modal-footer
+                    button.btn.btn-default Later
+                    button.btn.btn-primary Send
