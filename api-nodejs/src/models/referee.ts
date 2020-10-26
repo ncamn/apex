@@ -1,4 +1,4 @@
-import Joi from "@hapi/joi";
+import Joi from "joi";
 import mongodb from "mongodb";
 
 import db from "../db.js";
