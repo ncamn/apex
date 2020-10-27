@@ -19,7 +19,6 @@
     "typescript": "^3.9.3"
   },
   "dependencies": {
-    "chalk": "^4.0.0",
     "puppeteer": "^3.1.0"
   }
 }
