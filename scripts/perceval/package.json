@@ -5,7 +5,7 @@
   "license": "Unlicense",
   "type": "module",
   "scripts": {
-    "build": "tsc --esModuleInterop --module ES2020 index.ts",
+    "build": "tsc",
     "lint": "eslint --fix \"*.ts\"",
     "start": "node index.js",
     "prettify": "prettier --write \"*.{js,ts}\""
