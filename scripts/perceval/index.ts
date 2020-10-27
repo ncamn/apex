@@ -3,13 +3,14 @@ import puppeteer from "puppeteer";
 import readline from "readline";
 import yaml from "js-yaml";
 
-const ScrollIterations = 5;
+const ScrollIterations = +process.env.SCROLLS_COUNT || 100;
 
 type Config = {
   selectors: {
     messageSpan: string;
     conversationContainer: string;
     scrollableView: string;
+    spinner: string;
   };
 };
 
@@ -59,11 +60,23 @@ async function fetchMessages() {
     await page.$eval(config.selectors.scrollableView, (el) => {
       el.scrollIntoView();
     });
-    await page.waitFor(2000); // TODO Refactor this instruction
+
+    // Wait for spinner to appear
+    // TODO Improve
+    await page.waitFor(100);
+
+    // Wait for spinner to disappear
+    await page.waitForFunction(
+      (selector) => document.querySelector(selector) === null,
+      {},
+      config.selectors.spinner
+    );
   }
   const hrend = process.hrtime(hrstart);
   readline.cursorTo(process.stdout, 0);
-  process.stdout.write(`Scrolling ... done in ${hrend[0]}s\n`);
+  process.stdout.write(
+    `Scrolling ... done in ${hrend[0]}s ${(hrend[1] / 1000000).toFixed(0)}ms\n`
+  );
 
   // Extract conversation from page and save it locally
   process.stdout.write("Saving conversation ... ");
