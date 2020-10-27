@@ -1,14 +1,31 @@
 import fs from "fs";
 import puppeteer from "puppeteer";
 import readline from "readline";
+import yaml from "js-yaml";
 
-const ScrollableViewSelector = ".__i_._7i2k";
-const MessagesSpanSelector = "._3oh-._58nk";
-const ConversationSelector = "#js_1";
 const ScrollIterations = 5;
 
+type Config = {
+  selectors: {
+    messageSpan: string;
+    conversationContainer: string;
+    scrollableView: string;
+  };
+};
+
 async function fetchMessages() {
-  // Init
+  // Read configuration
+  const rawConfig = fs.readFileSync("./config.yml", "utf8");
+  let config: Config = yaml.safeLoad(rawConfig);
+
+  // Override the default config if necessary
+  if (fs.existsSync("./config.override.yml")) {
+    const rawConfigOverride = fs.readFileSync("./config.override.yml", "utf8");
+    const configOverride: Config = yaml.safeLoad(rawConfigOverride);
+    config = { ...config, ...configOverride };
+  }
+
+  // Launch browser
   const headless = process.env.HEADLESS !== "false";
   process.stdout.write(`Starting ${headless} browser ... `);
   const browser = await puppeteer.launch({ headless });
@@ -30,7 +47,7 @@ async function fetchMessages() {
   process.stdout.write("done\n");
 
   // Scroll messages view to lazy load older messages
-  await page.waitForSelector(ScrollableViewSelector);
+  await page.waitForSelector(config.selectors.scrollableView);
   const hrstart = process.hrtime();
   for (const idx in [...new Array(ScrollIterations)]) {
     // Log progress
@@ -39,7 +56,7 @@ async function fetchMessages() {
       `Scrolling ... ${((+idx / ScrollIterations) * 100).toFixed(0)}%`
     );
 
-    await page.$eval(ScrollableViewSelector, (el) => {
+    await page.$eval(config.selectors.scrollableView, (el) => {
       el.scrollIntoView();
     });
     await page.waitFor(2000); // TODO Refactor this instruction
@@ -50,7 +67,7 @@ async function fetchMessages() {
 
   // Extract conversation from page and save it locally
   process.stdout.write("Saving conversation ... ");
-  const conversation = await page.$(ConversationSelector);
+  const conversation = await page.$(config.selectors.conversationContainer);
   fs.writeFileSync(
     "output/conversation.html",
     `${await (await conversation.getProperty("innerHTML")).jsonValue()}`
@@ -59,7 +76,7 @@ async function fetchMessages() {
 
   // Extract messages text from page and save it locally
   process.stdout.write("Saving messages text ... ");
-  const messages = await page.$$(MessagesSpanSelector);
+  const messages = await page.$$(config.selectors.messageSpan);
   const writeStream = fs.createWriteStream("output/messages.txt");
   writeStream.on("error", (err) => {
     throw err;

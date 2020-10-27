@@ -1,0 +1,4 @@
+selectors:
+  conversationContainer: "#js_1"
+  messageSpan: "._3oh-._58nk"
+  scrollableView: ".__i_._7i2k"
