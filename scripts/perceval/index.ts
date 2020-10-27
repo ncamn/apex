@@ -34,7 +34,7 @@ async function fetchMessages() {
 
   // Go to conversation page
   process.stdout.write("done\nReaching messenger.com ... ");
-  await page.goto(process.env.MESSENGER_URL, {
+  await page.goto(`https://messenger.com/t/${process.env.CONVERSATION_ID}`, {
     waitUntil: "networkidle2",
   });
   process.stdout.write("done\n");
