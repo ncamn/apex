@@ -39,7 +39,7 @@ async function fetchMessages() {
   });
   process.stdout.write("done\n");
 
-  // Provide login credentials
+  // Login
   process.stdout.write("Logging in ... ");
   await page.type("#email", process.env.MESSENGER_EMAIL);
   await page.type("#pass", process.env.MESSENGER_PASSWORD);
@@ -47,8 +47,18 @@ async function fetchMessages() {
   await page.waitForNavigation();
   process.stdout.write("done\n");
 
-  // Scroll messages view to lazy load older messages
+  // Scroll conversation view to lazy load older messages
   await page.waitForSelector(config.selectors.scrollableView);
+
+  // Throttle
+  // const client = await page.target().createCDPSession();
+  // await client.send("Network.emulateNetworkConditions", {
+  //   offline: false,
+  //   downloadThroughput: (100 * 1024) / 8,
+  //   uploadThroughput: (100 * 1024) / 8,
+  //   latency: 20,
+  // });
+
   const hrstart = process.hrtime();
   for (const idx in [...new Array(ScrollIterations)]) {
     // Log progress
