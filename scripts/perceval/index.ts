@@ -77,16 +77,16 @@ async function fetchMessages() {
   await browser.close();
 }
 
-async function processMessages() {}
+// async function processMessages() {}
 
-async function createPlaylist() {
-  await fetch(
-    `https://api.spotify.com/v1/users/${process.env.SPOTIFY_USER_ID}/playlists`,
-    {
-      method: "POST",
-    }
-  );
-}
+// async function createPlaylist() {
+//   await fetch(
+//     `https://api.spotify.com/v1/users/${process.env.SPOTIFY_USER_ID}/playlists`,
+//     {
+//       method: "POST",
+//     }
+//   );
+// }
 
 async function main() {
   await fetchMessages();
