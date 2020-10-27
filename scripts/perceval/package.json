@@ -1,0 +1,21 @@
+{
+  "name": "perceval",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "Unlicense",
+  "type": "module",
+  "scripts": {
+    "build": "tsc --esModuleInterop --module ES2020 index.ts",
+    "start": "node index.js",
+    "prettify": "prettier --write \"*.{js,ts}\""
+  },
+  "devDependencies": {
+    "@types/puppeteer": "^3.0.0",
+    "prettier": "^2.0.5",
+    "typescript": "^3.9.3"
+  },
+  "dependencies": {
+    "chalk": "^4.0.0",
+    "puppeteer": "^3.1.0"
+  }
+}

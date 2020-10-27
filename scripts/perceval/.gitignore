@@ -1,0 +1,5 @@
+# Script output directory
+output/
+
+# Built Typescript sources
+*.js
