@@ -1,4 +1,4 @@
-import { useQuery } from "@apollo/react-hooks";
+import { useQuery } from "@apollo/client";
 import { gql } from "apollo-boost";
 import React from "react";
 import { useParams } from "react-router-dom";
@@ -15,7 +15,7 @@ const CLUB = (id: string) => gql`
 `;
 
 const Club = () => {
-  const { id } = useParams();
+  const { id } = useParams<{ id: string }>();
   const { loading, error, data } = useQuery(CLUB(id as string));
 
   if (loading) return <p>Loading...</p>;

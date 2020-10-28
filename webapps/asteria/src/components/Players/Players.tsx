@@ -1,4 +1,4 @@
-import { useQuery } from "@apollo/react-hooks";
+import { useQuery } from "@apollo/client";
 import { gql } from "apollo-boost";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
@@ -35,13 +35,13 @@ const Players = () => {
         ({
           _id,
           firstName,
-          lastName
+          lastName,
         }: {
           _id: string;
           firstName: string;
           lastName: string;
         }) => (
-          <Link className={styles.row} key={_id} to={`/players/${_id}`}>
+          <Link className={styles.row} key={_id} to={`/soccer/players/${_id}`}>
             {firstName} {lastName}
           </Link>
         )

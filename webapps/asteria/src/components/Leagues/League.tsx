@@ -1,4 +1,4 @@
-import { useQuery } from "@apollo/react-hooks";
+import { useQuery } from "@apollo/client";
 import { gql } from "apollo-boost";
 import React from "react";
 import { useParams } from "react-router-dom";
@@ -15,7 +15,7 @@ const LEAGUE = (id: string) => gql`
 `;
 
 const League = () => {
-  const { id } = useParams();
+  const { id } = useParams<{ id: string }>();
   const { loading, error, data } = useQuery(LEAGUE(id as string));
 
   if (loading) return <p>Loading...</p>;

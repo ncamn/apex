@@ -1,4 +1,4 @@
-import { useQuery } from "@apollo/react-hooks";
+import { useQuery } from "@apollo/client";
 import { gql } from "apollo-boost";
 import moment from "moment";
 import React from "react";
@@ -16,7 +16,7 @@ const MATCH = (id: string) => gql`
 `;
 
 const Match = () => {
-  const { id } = useParams();
+  const { id } = useParams<{ id: string }>();
   const { loading, error, data } = useQuery(MATCH(id as string));
 
   if (loading) return <p>Loading...</p>;

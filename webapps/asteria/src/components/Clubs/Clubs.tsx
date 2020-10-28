@@ -1,4 +1,4 @@
-import { useQuery } from "@apollo/react-hooks";
+import { useQuery } from "@apollo/client";
 import { gql } from "apollo-boost";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
@@ -31,7 +31,7 @@ const Clubs = () => {
         <Pager page={page} setPage={setPage} />
       </header>
       {data.clubs.map(({ _id, name }: { _id: string; name: string }) => (
-        <Link className={styles.row} key={name} to={`/clubs/${_id}`}>
+        <Link className={styles.row} key={name} to={`/soccer/clubs/${_id}`}>
           {name}
         </Link>
       ))}

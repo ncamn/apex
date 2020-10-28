@@ -1,0 +1,25 @@
+.sports {
+  display: flex;
+  flex-grow: 1;
+  margin: auto 2rem;
+}
+
+.sports a {
+  align-items: center;
+  color: white;
+  display: flex;
+  padding: 0 1rem;
+  text-decoration: none;
+}
+
+.sports svg {
+  margin: 0.6rem;
+}
+
+.parameters {
+  display: flex;
+}
+
+.parameters svg {
+  margin: 0.6rem;
+}

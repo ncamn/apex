@@ -4,7 +4,7 @@ import {
   Typography,
   CardActions,
   Button,
-  CardHeader
+  CardHeader,
 } from "@material-ui/core";
 import { SportsSoccer as SportsSoccerIcon } from "@material-ui/icons";
 import React, { FunctionComponent } from "react";
@@ -31,7 +31,7 @@ const MatchTile: FunctionComponent<Props> = ({ match }) => {
       </CardContent>
 
       <CardActions>
-        <Button component={RouterLink} to={`/matches/${match._id}`}>
+        <Button component={RouterLink} to={`/soccer/matches/${match._id}`}>
           More
         </Button>
       </CardActions>

@@ -1,150 +1,167 @@
-import { ApolloProvider } from "@apollo/react-hooks";
-import { CssBaseline, Toolbar } from "@material-ui/core";
-import ApolloClient from "apollo-boost";
-import React, { FunctionComponent, useState } from "react";
+import { CssBaseline, Toolbar, Typography } from "@material-ui/core";
 import {
-  BrowserRouter as Router,
-  Switch,
-  Redirect,
-  Route
-} from "react-router-dom";
+  LocationCity as LocationCityIcon,
+  People as PeopleIcon,
+  Person as PersonIcon,
+  RssFeed as RssFeedIcon,
+  Sports as SportsIcon,
+  SportsBaseball as SportsBaseballIcon,
+  SportsBasketball as SportsBasketballIcon,
+  SportsEsports as SportsEsportsIcon,
+  SportsFootball as SportsFootballIcon,
+  SportsMma as SportsMmaIcon,
+  SportsMotorsports as SportsMotorsportsIcon,
+  SportsRugby as SportsRugbyIcon,
+  SportsSoccer as SportsSoccerIcon,
+  SportsTennis as SportsTennisIcon,
+  TrendingUp as TrendingUpIcon,
+} from "@material-ui/icons";
+import React, { FunctionComponent, useState } from "react";
+import { Switch, Route, Link } from "react-router-dom";
 
 import AppBar from "./components/AppBar/AppBar";
-import AppDrawer from "./components/AppDrawer/AppDrawer";
+import AppDrawer, { ListItemLink } from "./components/AppDrawer/AppDrawer";
 import Home from "./components/Home/Home";
-import League from "./components/Leagues/League";
-import Leagues from "./components/Leagues/Leagues";
-import Match from "./components/Matches/Match";
-import Matches from "./components/Matches/Matches";
-import Player from "./components/Players/Player";
-import Players from "./components/Players/Players";
-import Referee from "./components/Referees/Referee";
-import Referees from "./components/Referees/Referees";
-import Stadium from "./components/Stadiums/Stadium";
-import Stadiums from "./components/Stadiums/Stadiums";
-import Club from "./components/Clubs/Club";
-import Clubs from "./components/Clubs/Clubs";
+import Soccer from "./components/Soccer/Soccer";
+import Rugby from "./components/Rugby/Rugby";
+import Basketball from "./components/Basketball/Basketball";
+import Tennis from "./components/Tennis/Tennis";
+import Baseball from "./components/Baseball/Baseball";
+import Football from "./components/Football/Football";
+import Esports from "./components/Esports/Esports";
+import Motorsports from "./components/Motorsports/Motorsports";
+import Mma from "./components/Mma/Mma";
+import NotFound from "./NotFound";
 
 import styles from "./App.module.css";
 
-const client = new ApolloClient({
-  uri: "https://localhost:3001/graphql"
-});
+const routes = [
+  {
+    drawerLinks: [
+      { icon: <RssFeedIcon />, primary: "News", to: "/" },
+      { icon: <TrendingUpIcon />, primary: "Leagues", to: "/leagues" },
+      { icon: <SportsSoccerIcon />, primary: "Matches", to: "/matches" },
+      { icon: <PersonIcon />, primary: "Players", to: "/players" },
+      { icon: <SportsIcon />, primary: "Referees", to: "/referees" },
+      { icon: <LocationCityIcon />, primary: "Stadiums", to: "/stadiums" },
+      { icon: <PeopleIcon />, primary: "Clubs", to: "/clubs" },
+    ],
+    icon: <SportsSoccerIcon />,
+    mainContent: <Soccer />,
+    name: "Soccer",
+    path: "/soccer",
+  },
+  {
+    drawerLinks: [{ icon: <PersonIcon />, primary: "Players", to: "/players" }],
+    icon: <SportsRugbyIcon />,
+    mainContent: <Rugby />,
+    name: "Rugby",
+    path: "/rugby",
+  },
+  {
+    drawerLinks: [{ icon: <PersonIcon />, primary: "Players", to: "/players" }],
+    icon: <SportsTennisIcon />,
+    mainContent: <Tennis />,
+    name: "Tennis",
+    path: "/tennis",
+  },
+  {
+    drawerLinks: [{ icon: <PersonIcon />, primary: "Players", to: "/players" }],
+    icon: <SportsBasketballIcon />,
+    mainContent: <Basketball />,
+    name: "Basketball",
+    path: "/basketball",
+  },
+  {
+    drawerLinks: [{ icon: <PersonIcon />, primary: "Players", to: "/players" }],
+    icon: <SportsBaseballIcon />,
+    mainContent: <Baseball />,
+    name: "Baseball",
+    path: "/baseball",
+  },
+  {
+    drawerLinks: [{ icon: <PersonIcon />, primary: "Players", to: "/players" }],
+    icon: <SportsFootballIcon />,
+    mainContent: <Football />,
+    name: "Football",
+    path: "/football",
+  },
+  {
+    drawerLinks: [{ icon: <PersonIcon />, primary: "Players", to: "/players" }],
+    icon: <SportsMmaIcon />,
+    mainContent: <Mma />,
+    name: "MMA",
+    path: "/mma",
+  },
+  {
+    drawerLinks: [{ icon: <PersonIcon />, primary: "Players", to: "/players" }],
+    icon: <SportsMotorsportsIcon />,
+    mainContent: <Motorsports />,
+    name: "Motorsports",
+    path: "/motorsports",
+  },
+  {
+    drawerLinks: [{ icon: <PersonIcon />, primary: "Players", to: "/players" }],
+    icon: <SportsEsportsIcon />,
+    mainContent: <Esports />,
+    name: "E-Sports",
+    path: "/e-sports",
+  },
+];
 
 const App: FunctionComponent = () => {
-  const [shrinkedDrawer, shrinkDrawer] = useState(false);
+  const [shrunkDrawer, shrinkDrawer] = useState(false);
 
   return (
-    <ApolloProvider client={client}>
-      <Router>
-        <div className={styles.app}>
-          <CssBaseline />
+    <div className={styles.app}>
+      <CssBaseline />
 
-          <AppBar shrinkDrawer={() => shrinkDrawer(!shrinkedDrawer)} />
+      <AppBar shrinkDrawer={() => shrinkDrawer(!shrunkDrawer)}>
+        {routes.map(({ icon, path, name }, idx) => (
+          <Link key={idx} to={path}>
+            {icon}
+            <Typography>{name}</Typography>
+          </Link>
+        ))}
+      </AppBar>
 
-          <AppDrawer shrinked={shrinkedDrawer} />
+      <AppDrawer shrunk={shrunkDrawer}>
+        {routes.map(({ drawerLinks, path }, idx) => (
+          <Route key={idx} path={path}>
+            {drawerLinks.map(({ icon, primary, to }, idx2) => {
+              return (
+                <ListItemLink
+                  icon={icon}
+                  key={idx2}
+                  primary={primary}
+                  to={`${path}${to}`}
+                />
+              );
+            })}
+          </Route>
+        ))}
+      </AppDrawer>
 
-          <main className={styles.content}>
-            <Toolbar />
+      <main className={styles.content}>
+        <Toolbar />
 
-            {/* prettier-ignore */}
-            <Switch>
-              /** 
-              Leagues
-              */
-              <Route path="/leagues/soccer">
-                <Leagues />
-              </Route>
-              <Route path="/leagues/:id">
-                <League />
-              </Route>
-              <Route path="/leagues">
-                <Redirect to="/leagues/soccer" />
-              </Route>
+        <Switch>
+          <Route exact path="/">
+            <Home />
+          </Route>
 
-              /**
-              Matches
-              */
-              <Route path="/matches/:id">
-                <Match />
-              </Route>
-              <Route path="/matches">
-                <Matches />
-              </Route>
-
-              /**
-              Monitoring
-              */
-              <Route path="/monitoring">
-                Monitoring
+          {routes.map(({ mainContent, path }, idx) => (
+            <Route key={idx} path={path}>
+              {mainContent}
             </Route>
+          ))}
 
-              /** 
-              Players
-              */
-              <Route path="/players/basketball">
-                Baksetball players
-            </Route>
-              <Route path="/players/rugby">
-                Rugby players
-            </Route>
-              <Route path="/players/soccer">
-                <Players />
-              </Route>
-              <Route path="/players/tennis">
-                Tennis
-            </Route>
-              <Route path="/players/:id">
-                <Player />
-              </Route>
-              <Route path="/players">
-                <Redirect to="/players/soccer" />
-              </Route>
-
-              /**
-              Referees
-              */
-              <Route path="/referees/:id">
-                <Referee />
-              </Route>
-              <Route path="/referees">
-                <Referees />
-              </Route>
-
-              /**
-              Stadiums
-              */
-              <Route path="/stadiums/:id">
-                <Stadium />
-              </Route>
-              <Route path="/stadiums">
-                <Stadiums />
-              </Route>
-
-              /**
-              Clubs
-              */
-              <Route path="/clubs/soccer">
-                <Clubs />
-              </Route>
-              <Route path="/clubs/:id">
-                <Club />
-              </Route>
-              <Route path="/clubs">
-                <Redirect to="/clubs/soccer" />
-              </Route>
-
-              /**
-              General
-              */
-              <Route path="/">
-                <Home />
-              </Route>
-            </Switch>
-          </main>
-        </div>
-      </Router>
-    </ApolloProvider>
+          <Route>
+            <NotFound />
+          </Route>
+        </Switch>
+      </main>
+    </div>
   );
 };
 

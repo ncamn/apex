@@ -15,7 +15,7 @@ const ClubTile: FunctionComponent<Props> = ({ club }) => (
       subheader="2014 - now"
     />
     <CardActions>
-      <Button component={RouterLink} to={`/clubs/${club._id}`}>
+      <Button component={RouterLink} to={`/soccer/clubs/${club._id}`}>
         See club
       </Button>
     </CardActions>

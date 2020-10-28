@@ -1,4 +1,4 @@
-import { useQuery } from "@apollo/react-hooks";
+import { useQuery } from "@apollo/client";
 import { gql } from "apollo-boost";
 import moment from "moment";
 import React, { useState } from "react";
@@ -32,7 +32,7 @@ const Matches = () => {
         <Pager page={page} setPage={setPage} />
       </header>
       {data.matches.map(({ _id, date }: { _id: string; date: Date }) => (
-        <Link className={styles.row} key={_id} to={`/matches/${_id}`}>
+        <Link className={styles.row} key={_id} to={`/soccer/matches/${_id}`}>
           {moment(date).format("dddd, MMMM Do YYYY")}
         </Link>
       ))}
