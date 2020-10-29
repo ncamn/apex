@@ -25,7 +25,9 @@ import {
   RefereeResolvers,
   RefereeTypeDef,
   StadiumResolvers,
-  StadiumTypeDef
+  StadiumTypeDef,
+  UserResolvers,
+  UserTypeDef
 } from "./models/index.js";
 
 const { ApolloServer } = apolloServerKoa;
@@ -52,7 +54,8 @@ const typeDefs = [
   MatchTypeDef,
   PlayerTypeDef,
   RefereeTypeDef,
-  StadiumTypeDef
+  StadiumTypeDef,
+  UserTypeDef
 ];
 
 // The root provides a resolver function for each API endpoint
@@ -62,7 +65,8 @@ const resolvers = _.merge(
   MatchResolvers,
   PlayerResolvers,
   RefereeResolvers,
-  StadiumResolvers
+  StadiumResolvers,
+  UserResolvers
 );
 
 /**

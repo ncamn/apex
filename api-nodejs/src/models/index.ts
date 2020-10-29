@@ -33,3 +33,9 @@ export {
   typeDef as StadiumTypeDef,
   resolvers as StadiumResolvers
 } from "./stadium.js";
+
+export {
+  User,
+  typeDef as UserTypeDef,
+  resolvers as UserResolvers
+} from "./user.js";
