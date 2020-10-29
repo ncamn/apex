@@ -1,5 +1,7 @@
 import {
+  Button,
   Card,
+  CardActions,
   CardContent,
   CardMedia,
   CircularProgress,
@@ -10,16 +12,19 @@ import React, { FunctionComponent, useEffect, useState } from "react";
 
 import styles from "./NewsFeed.module.css";
 
-type Entry = {
+export type FeedEntry = {
   description: string;
+  link: string;
   thumbnail: string;
   title: string;
 };
 
-const feedUrl =
-  "https://cors-anywhere.herokuapp.com/https://www.goal.com/feeds/en/news";
+type Props = {
+  feedUrl: string;
+  parseFeed: (feed: Document) => FeedEntry[];
+};
 
-const NewsFeed: FunctionComponent = () => {
+const NewsFeed: FunctionComponent<Props> = ({ feedUrl, parseFeed }) => {
   const [feed, setFeed] = useState<Document | null>(null);
 
   useEffect(() => {
@@ -30,7 +35,7 @@ const NewsFeed: FunctionComponent = () => {
           new window.DOMParser().parseFromString(text, "text/xml")
         );
 
-      setFeed(parsedResponse as any);
+      setFeed(parsedResponse);
     })();
   }, []);
 
@@ -41,19 +46,7 @@ const NewsFeed: FunctionComponent = () => {
       </div>
     );
 
-  let entries: Entry[] = [];
-  feed.querySelectorAll("item").forEach((el) => {
-    entries = [
-      ...entries,
-      {
-        description: el.querySelector("description")!.innerHTML,
-        thumbnail: el
-          .getElementsByTagName("media:thumbnail")[0]
-          .attributes.getNamedItem("url")!.value,
-        title: el.querySelector("title")!.innerHTML,
-      },
-    ];
-  });
+  const entries = parseFeed(feed);
 
   return (
     <div className={styles.root}>
@@ -62,10 +55,19 @@ const NewsFeed: FunctionComponent = () => {
           <Grid item key={idx} xs>
             <Card className={styles.card}>
               <CardMedia className={styles.cardMedia} image={entry.thumbnail} />
-              <CardContent>
-                <Typography variant="h6">{entry.title.slice(9, -3)}</Typography>
-                <Typography>{entry.description.slice(9, -3)}</Typography>
+              <CardContent className={styles.cardContent}>
+                <Typography gutterBottom variant="h5">
+                  {entry.title}
+                </Typography>
+                <Typography variant="body1">{entry.description}</Typography>
               </CardContent>
+              <CardActions>
+                <Button color="primary">
+                  <a className={styles.link} href={entry.link} target="_blank">
+                    Read more
+                  </a>
+                </Button>
+              </CardActions>
             </Card>
           </Grid>
         ))}

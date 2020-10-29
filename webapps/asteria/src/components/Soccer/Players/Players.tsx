@@ -3,7 +3,7 @@ import { gql } from "apollo-boost";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-import Pager from "../Pager";
+import Pager from "../../Pager";
 
 import styles from "./Players.module.css";
 

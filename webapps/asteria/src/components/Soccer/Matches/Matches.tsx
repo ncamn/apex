@@ -4,7 +4,7 @@ import moment from "moment";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-import Pager from "../Pager";
+import Pager from "../../Pager";
 
 import styles from "./Matches.module.css";
 

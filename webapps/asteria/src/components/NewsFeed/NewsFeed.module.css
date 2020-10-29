@@ -6,14 +6,27 @@
 }
 
 .root {
+  background: #ececec;
   padding: 1rem;
 }
 
 .card {
-  min-width: 320px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-width: 380px;
 }
 
 .cardMedia {
   height: 0;
   padding-top: 55.25%;
+}
+
+.cardContent {
+  flex-grow: 1;
+}
+
+.link {
+  color: inherit;
+  text-decoration: none;
 }
