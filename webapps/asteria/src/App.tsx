@@ -1,4 +1,11 @@
-import { CssBaseline, Toolbar, Typography } from "@material-ui/core";
+import {
+  createMuiTheme,
+  CssBaseline,
+  ThemeProvider,
+  Toolbar,
+  Typography,
+  useMediaQuery,
+} from "@material-ui/core";
 import {
   LocationCity as LocationCityIcon,
   People as PeopleIcon,
@@ -16,7 +23,7 @@ import {
   SportsTennis as SportsTennisIcon,
   TrendingUp as TrendingUpIcon,
 } from "@material-ui/icons";
-import React, { FunctionComponent, useState } from "react";
+import React, { FunctionComponent, useMemo, useState } from "react";
 import { Switch, Route, Link } from "react-router-dom";
 
 import AppBar from "./components/AppBar/AppBar";
@@ -111,56 +118,73 @@ const routes = [
 
 const App: FunctionComponent = () => {
   const [shrunkDrawer, shrinkDrawer] = useState(false);
+  const preferedDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
+  const [darkMode, setDarkMode] = useState(preferedDarkMode);
+
+  const theme = useMemo(
+    () =>
+      createMuiTheme({
+        palette: {
+          type: darkMode ? "dark" : "light",
+        },
+      }),
+    [darkMode]
+  );
 
   return (
     <div className={styles.app}>
-      <CssBaseline />
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
 
-      <AppBar shrinkDrawer={() => shrinkDrawer(!shrunkDrawer)}>
-        {routes.map(({ icon, path, name }, idx) => (
-          <Link key={idx} to={path}>
-            {icon}
-            <Typography>{name}</Typography>
-          </Link>
-        ))}
-      </AppBar>
+        <AppBar
+          shrinkDrawer={() => shrinkDrawer(!shrunkDrawer)}
+          switchTheme={() => setDarkMode(!darkMode)}
+        >
+          {routes.map(({ icon, path, name }, idx) => (
+            <Link key={idx} to={path}>
+              {icon}
+              <Typography>{name}</Typography>
+            </Link>
+          ))}
+        </AppBar>
 
-      <AppDrawer shrunk={shrunkDrawer}>
-        {routes.map(({ drawerLinks, path }, idx) => (
-          <Route key={idx} path={path}>
-            {drawerLinks.map(({ icon, primary, to }, idx2) => {
-              return (
-                <ListItemLink
-                  icon={icon}
-                  key={idx2}
-                  primary={primary}
-                  to={`${path}${to}`}
-                />
-              );
-            })}
-          </Route>
-        ))}
-      </AppDrawer>
-
-      <main className={styles.content}>
-        <Toolbar />
-
-        <Switch>
-          <Route exact path="/">
-            <Home />
-          </Route>
-
-          {routes.map(({ mainContent, path }, idx) => (
+        <AppDrawer shrunk={shrunkDrawer}>
+          {routes.map(({ drawerLinks, path }, idx) => (
             <Route key={idx} path={path}>
-              {mainContent}
+              {drawerLinks.map(({ icon, primary, to }, idx2) => {
+                return (
+                  <ListItemLink
+                    icon={icon}
+                    key={idx2}
+                    primary={primary}
+                    to={`${path}${to}`}
+                  />
+                );
+              })}
             </Route>
           ))}
+        </AppDrawer>
 
-          <Route>
-            <NotFound />
-          </Route>
-        </Switch>
-      </main>
+        <main className={styles.content}>
+          <Toolbar />
+
+          <Switch>
+            <Route exact path="/">
+              <Home />
+            </Route>
+
+            {routes.map(({ mainContent, path }, idx) => (
+              <Route key={idx} path={path}>
+                {mainContent}
+              </Route>
+            ))}
+
+            <Route>
+              <NotFound />
+            </Route>
+          </Switch>
+        </main>
+      </ThemeProvider>
     </div>
   );
 };

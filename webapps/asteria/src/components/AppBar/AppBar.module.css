@@ -23,3 +23,19 @@
 .parameters svg {
   margin: 0.6rem;
 }
+
+.popover {
+  display: flex;
+  flex-direction: column;
+}
+
+.popover > div {
+  align-items: center;
+  display: flex;
+  margin-right: 0.6rem;
+}
+
+.popover > div img,
+.popover > div svg {
+  margin: 0.6rem;
+}

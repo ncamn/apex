@@ -37,7 +37,7 @@ const NewsFeed: FunctionComponent<Props> = ({ feedUrl, parseFeed }) => {
 
       setFeed(parsedResponse);
     })();
-  }, []);
+  }, [feedUrl]);
 
   if (!feed)
     return (
@@ -63,7 +63,12 @@ const NewsFeed: FunctionComponent<Props> = ({ feedUrl, parseFeed }) => {
               </CardContent>
               <CardActions>
                 <Button color="primary">
-                  <a className={styles.link} href={entry.link} target="_blank">
+                  <a
+                    className={styles.link}
+                    href={entry.link}
+                    rel="noreferrer"
+                    target="_blank"
+                  >
                     Read more
                   </a>
                 </Button>
